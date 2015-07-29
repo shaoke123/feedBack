@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap
+        PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Movie">
+
+    <!-- Select with no parameters using the result map for Account class. -->
+    <insert id="insertMovieType" parameterClass="java.util.HashMap">
+        INSERT INTO movie_type (
+        type_id ,
+        type_name ,
+        type_sequence ,
+        drama_type_id
+        )
+        VALUES (#typeId:VARCHAR#, #typeName:VARCHAR#, #typeSequence:VARCHAR#, #dramaTypeId:VARCHAR#)
+    </insert>
+    <select id="selectAllMovieTypes"  resultClass="java.util.HashMap">
+        select * from movie_type
+    </select>
+
+    <select id="selectAllColumns"  resultClass="java.util.HashMap">
+        select * from movie_column
+    </select>
+
+    <!--用户反馈部分-->
+
+    <insert id="insertClientUserInfo" parameterClass="java.util.HashMap">
+        INSERT INTO client_user (
+        username,
+        contactway,
+        usermac
+        )
+        VALUES (#userName:VARCHAR#,#userTel:VARCHAR#,#userMac:VARCHAR#)
+    </insert>
+
+
+    <insert id="insertFeedBackInfo" parameterClass="java.util.HashMap">
+        INSERT INTO feedback_info (
+        content,
+        user_mac,
+        status,
+        fd_year,
+        fd_month,
+        fd_day
+        )
+        VALUES (#feedInfoContent:VARCHAR#,#userMac:VARCHAR#,#status:VARCHAR#,#fd_year:VARCHAR#,#fd_month:VARCHAR#,#fd_day:VARCHAR#)
+    </insert>
+
+    <typeAlias alias="record" type="com.changhong.system.domain.ClientUser" />
+    <insert id="insertRecord"  parameterClass="record">
+        insert into client_user(
+        username,
+        contactway,
+        usermac
+        )
+        values(name,contactway,mac)
+    </insert>
+
+    <!--统计部分-->
+    <insert id="insertTvChannel" parameterClass="java.util.HashMap">
+        INSERT INTO tv_channel (
+        channel_name,
+        channel_sequence
+        )
+        VALUES(#channelName:VARCHAR#,#channelSequence:VARCHAR#)
+    </insert>
+
+    <insert id="insertTvChannelInfo" parameterClass="java.util.HashMap">
+        INSERT INTO tv_channel_info (
+        tv_channel_name,
+        tv_program_name,
+        user_mac,
+        appkey,
+        status,
+        fd_year,
+        fd_month,
+        fd_day,
+        fd_hour
+        )
+        VALUES (#tvChannelName:VARCHAR#,#tvProgramName:VARCHAR#,#userMac:VARCHAR#,#appKey:VARCHAR#,#status:VARCHAR#,#fd_year:VARCHAR#,#fd_month:VARCHAR#,#fd_day:VARCHAR#,#fd_hour:VARCHAR#)
+    </insert>
+
+</sqlMap>

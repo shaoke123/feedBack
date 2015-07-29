@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-access="field">
+    <class name="com.changhong.system.domain.ClientUser" table="client_user">
+        <id name="id" column="id">
+            <generator class="increment"/>
+        </id>
+        <property name="timestamp" column="timestamp" type="java.util.Date"/>
+
+        <property name="name" column="username" insert="true" update="true" type="java.lang.String"/>
+        <property name="contactway" column="contactway" insert="true" update="true" type="java.lang.String"/>
+        <property name="mac" column="usermac" insert="true" update="true" type="java.lang.String"/>
+    </class>
+
+    <class name="com.changhong.system.domain.AppIcon" table="app_icon_file">
+        <cache usage="read-write"/>
+        <id name="id" column="id">
+            <generator class="increment"/>
+        </id>
+        <property name="timestamp" column="timestamp" type="java.util.Date"/>
+
+        <property name="uploadFileName" column="upload_filename" insert="true" update="true" type="java.lang.String"/>
+        <property name="actualFileName" column="actual_filename" insert="true" update="true" type="java.lang.String"/>
+        <property name="uploadTime" column="upload_time" insert="true" update="true" type="org.joda.time.contrib.hibernate.PersistentDateTime"/>
+    </class>
+
+    <class name="com.changhong.system.domain.App" table="app_info">
+        <id name="id" column="id">
+            <generator class="increment"/>
+        </id>
+        <property name="timestamp" column="timestamp" type="java.util.Date"/>
+
+        <property name="appname" column="app_name" insert="true" update="true" type="java.lang.String"/>
+        <property name="appkey" column="app_key" insert="true" update="true" type="java.lang.String"/>
+        <property name="appdes" column="app_des" insert="true" update="true" type="java.lang.String"/>
+        <many-to-one name="appIcon" column="app_file_id" class="com.changhong.system.domain.AppIcon" cascade="all" lazy="false" insert="true" update="true"/>
+    </class>
+
+</hibernate-mapping>
